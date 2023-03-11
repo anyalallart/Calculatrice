@@ -1,0 +1,22 @@
+.calculatrice {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+
+button {
+    padding: 10px;
+    width: 70px;
+    height: 45px;
+    margin: 2px;
+    background-color: rgb(227, 227, 227);
+    color: black;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#l4-4{
+    width: 138px; 
+    background-color: darkgreen; 
+}
