@@ -1,21 +1,22 @@
-function clear() {
-    console.log("yo");
+function efface() {
     document.getElementById("output").innerHTML = "0";
 }
 
-function click(carac){
-    console.log("yo");
-    let v = document.getElementById("output").innerHTML;
-    if (v== "0") {
-         document.getElementById("output").innerHTML = carac;
-    }
-    else {
-        value += carac;
-    }
+function clique(carac){
+    let v = document.getElementById("output");
+    if(carac == "r") carac = ")";
+    if(carac == "l") carac = "(";
+
+    if (v.innerHTML == "0") v.innerHTML = carac;
+    else v.innerHTML += carac;
 }
 
 function calcul(){
-    let equa = eval(document.getElementById("output").innerHTML);
-    document.getElementById('output_solve').innerHTML = equa;
-    document.getElementById('output').innerHTML = "0";
+    try {
+        let equa = eval(document.getElementById("output").innerHTML);
+        document.getElementById('output_solve').innerHTML = document.getElementById('output').innerHTML + " = " + equa;
+        document.getElementById('output').innerHTML = "0";
+    } catch (error) {
+        document.getElementById('output').innerHTML = "Error";
+    }
 }
