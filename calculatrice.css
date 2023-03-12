@@ -1,8 +1,16 @@
 .calculatrice {
+    display: flex;
+    flex-direction: column;
     margin: auto;
-    width: 60%;
-    border: 3px solid #73AD21;
+    width: 37%;
+    border: 3px solid #000000;
     padding: 10px;
+}
+
+.affichage{
+    background-color: aliceblue;
+    text-align: center;
+    margin-bottom: 5px;
 }
 
 button {
@@ -10,13 +18,25 @@ button {
     width: 70px;
     height: 45px;
     margin: 2px;
-    background-color: rgb(227, 227, 227);
+    background-color: rgb(243, 243, 243);
     color: black;
     font-size: 20px;
     border-radius: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #7a7a7a;
+    color: white;
+}
+
+#l1-5, #l4-3{
+    margin-left: 80px;
 }
 
 #l4-4{
-    width: 138px; 
-    background-color: darkgreen; 
+    flex-basis: 200px;
+    background-color: rgb(18, 164, 42); 
+    width: 150px;
 }

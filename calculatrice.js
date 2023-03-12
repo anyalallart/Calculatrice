@@ -1,8 +1,10 @@
 function clear() {
+    console.log("yo");
     document.getElementById("output").innerHTML = "0";
 }
 
 function click(carac){
+    console.log("yo");
     let v = document.getElementById("output").innerHTML;
     if (v== "0") {
          document.getElementById("output").innerHTML = carac;
