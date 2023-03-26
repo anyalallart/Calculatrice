@@ -34,7 +34,8 @@ class BaseCalculator {
     retour(){
         try {
             if (this.curentCalcul.length == 0){
-                this.out.innerHTML = "";
+                if (this.totalCalcul.length == 0) this.out.innerHTML = "0";
+                else this.out.innerHTML = "";
                 this.curentCalcul = this.totalCalcul[this.totalCalcul.length - 1];
                 this.curentCalcul.forEach(e=>{
                     this.out.innerHTML += e;
