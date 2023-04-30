@@ -5,8 +5,8 @@ export const typeOrmConfig : TypeOrmModuleOptions = {
     type: 'mysql',
     host: 'localhost',
     port: 3306,
-    username: 'junia_user',
-    password: 'junia_user',
-    database: 'junia',
+    username: 'root',
+    password: 'BH33e2va',
+    database: 'calculatrice',
     entities: [Annonce],
 };

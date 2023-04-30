@@ -4,7 +4,6 @@ import { AnnoncesController } from './annonces.controller';
 import { AnnoncesService } from './annonces.service';
 import { Annonce } from './annonces.entity';
 
-
 @Module({
   imports: [TypeOrmModule.forFeature([Annonce])],
   controllers: [AnnoncesController],
