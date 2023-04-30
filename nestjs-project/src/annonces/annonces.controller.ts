@@ -1,22 +1,25 @@
-import { Controller, Get, Post, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { MessageDto } from './annonces.dto';
+
 import { AnnoncesService } from './annonces.service';
 
 @Controller('annonces')
 export class AnnoncesController {
-
     constructor(private annoncesService: AnnoncesService) {}
 
     @Get()
-    getAllAnnonces() {
-        console.log('get all');
-        return this.annoncesService.getAnnonces();
+    StartTimer() {
+        console.log('First carac');
+        this.annoncesService.timeStart();
+        return {message: "start timer"}
     }
+
     @Post()
-    createAnnonce() {
-        console.log('create');
-    }
-    @Delete()
-    deleteAnnonce() {
-        console.log('delete');
+    createAnnonce(@Body() message: MessageDto){
+        const t = this.annoncesService.timeEnd();
+        this.annoncesService.createAnnonces(t, message.calcul);
+        this.annoncesService.getMoy();
+        console.log(message);
+        return message;
     }
 }

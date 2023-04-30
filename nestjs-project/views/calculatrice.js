@@ -17,20 +17,39 @@ class BaseCalculator {
         if(carac == "l") carac = "(";
     
         this.curentCalcul.push(carac);
-
-        if (this.out.innerHTML == "0") this.out.innerHTML = carac;
+        
+        if (this.out.innerHTML == "0"){ 
+            this.out.innerHTML = carac;
+            fetch('http://localhost:3000/annonces')
+            .then(function(res){ console.log(res) })
+            .catch(function(res){ console.log(res) })
+        }
         else this.out.innerHTML += carac;
     }
     
     calcul(){
         // fonction qui renvoie le calcul effectué
         try {
-            let equa = eval(this.out.innerHTML);
+            let equation = this.out.innerHTML
+            let equa = eval(equation);
             this.totalCalcul.push(this.curentCalcul);
             document.getElementById('output_solve').innerHTML = this.out.innerHTML + " = " + equa;
             this.efface();
+            fetch('http://localhost:3000/annonces', { // calcul ok, on l'envoie en requete POST
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    body: JSON.stringify({calcul: equation})
+                })
+            .then(function(res){ console.log(res) })
+            .catch(function(res){ console.log(res) })
         } catch (error) {
             this.out.innerHTML = "Error";
+            fetch('http://localhost:3000/erreur') // calcul faux, erreur
+            .then(function(res){ console.log(res) })
+            .catch(function(res){ console.log(res) })
         }
     }
 

@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Annonce } from '../annonces/annonces.entity';
+import { Erreur } from '../erreur/erreur.entity';
 
 export const typeOrmConfig : TypeOrmModuleOptions = {
     type: 'mysql',
@@ -8,5 +9,6 @@ export const typeOrmConfig : TypeOrmModuleOptions = {
     username: 'root',
     password: 'BH33e2va',
     database: 'calculatrice',
-    entities: [Annonce],
+    synchronize: true,
+    entities: [Annonce, Erreur],
 };

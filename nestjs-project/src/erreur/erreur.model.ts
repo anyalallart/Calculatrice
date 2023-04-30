@@ -1,4 +1,4 @@
-export interface Annonce {
+export interface Erreur {
     id: string;
     created: Date;
 }

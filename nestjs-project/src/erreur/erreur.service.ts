@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Erreur } from './erreur.entity';
-import { Repository } from 'typeorm';
+import { MaxKey, Repository } from 'typeorm';
 
 @Injectable()
 export class ErreurService {
@@ -10,17 +10,44 @@ export class ErreurService {
         private erreurRepository : Repository<Erreur>,
     ){}
 
-    async createErreur(id : string, created : Date){
+    async createErreur(){
         const erreur = new Erreur();
-        erreur.id = id;
-        erreur.created = created;
-        await erreur.save();
+        erreur.created = (new Date()).toISOString().split('T')[0];
+        console.log("bmblbl", erreur);
+        
+        try {
+            await erreur.save(); 
+        } catch (error) {
+            console.log(error);
+        }
         return erreur;
     }
 
     async getErreur(){
-        const res = await this.erreurRepository.find();
+        const res = await this.erreurRepository.findOne({
+            where: { },
+            order: {
+                id: "desc",
+            }
+        });
         console.log('erreur est :', res);
         return res;
+    }
+
+    async getNumber(){
+        const nb = await this.erreurRepository.count();
+        console.log('nombre erreur:', nb+1);
+        return nb+1;
+    }
+
+    async dateErreur(){
+        const date = await this.erreurRepository.findOne({
+            where: { },
+            order: {
+                id: "desc",
+            }
+        });
+        console.log('dernière date:', date);
+        return date;
     }
 }

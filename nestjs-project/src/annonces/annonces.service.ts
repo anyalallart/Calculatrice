@@ -5,22 +5,46 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class AnnoncesService {
+    start:number
     constructor(
         @InjectRepository(Annonce)
         private annoncesRepository: Repository<Annonce>,
-        ) {}
+        ) { }
 
-    async createAnnonces(id : string, temps : number){
+    async createAnnonces(temps:number, calcul:string){
         const annonce = new Annonce();
-        annonce.id = id;
         annonce.temps = temps;
+        annonce.calcul = calcul;
         await annonce.save();
         return annonce;
     }
 
     async getAnnonces() {
-        const res = await this.annoncesRepository.find();
+        const res = await this.annoncesRepository.findOne({
+            where: { },
+            order: {
+                id: "desc",
+            }
+        });
         console.log('Calcul est :', res);
         return res;
+    }
+    
+    timeStart(){
+        this.start = Date.now();
+        return this.start;
+    }
+
+    timeEnd(){
+        const end =  Date.now();
+
+        console.log(`Execution time: ${end - this.start} ms`);
+        return (end - this.start);
+    }
+
+    async getMoy(){
+        const moy = await this.annoncesRepository.average('temps');
+        console.log("Moyenne : ", moy);
+        return moy;
     }
 };

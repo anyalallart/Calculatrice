@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { ErreurService } from './erreur.service';
 import { Erreur } from './erreur.entity';
 
@@ -8,15 +8,9 @@ export class ErreurController {
     
     @Get()
     getErreur(){
-        console.log('get erreur');
-        return this.erreurService.getErreur();
-    }
-
-    @Post()
-    createErreur(
-        @Body('id') id: string,
-        @Body('created_at') created_at : Date, 
-        ): Promise<Erreur>{
-        return this.erreurService.createErreur(id, created_at);
+        console.log('get erreur, nombre, dernière date');
+        this.erreurService.createErreur();   
+        let obj = [this.erreurService.getErreur(), this.erreurService.dateErreur(), this.erreurService.getNumber()];
+        return obj;
     }
 }

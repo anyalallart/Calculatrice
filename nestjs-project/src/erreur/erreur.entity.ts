@@ -5,5 +5,5 @@ export class Erreur extends BaseEntity{
     @PrimaryGeneratedColumn()
     id : string;
     @CreateDateColumn()
-    created: Date;
+    created: string;
 }
