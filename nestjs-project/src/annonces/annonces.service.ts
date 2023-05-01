@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Annonce } from './annonces.entity';
-import { Repository } from 'typeorm';
+import { LessThan, Repository } from 'typeorm';
 
 @Injectable()
 export class AnnoncesService {
@@ -46,5 +46,18 @@ export class AnnoncesService {
         const moy = await this.annoncesRepository.average('temps');
         console.log("Moyenne : ", moy);
         return moy;
+    }
+
+    async getPourc(t : number){
+        const faster = await this.annoncesRepository.find({
+            where: { 
+                temps: LessThan(t),
+            },
+        });
+        console.log(faster);
+        const nb = await this.annoncesRepository.count();
+        let pourc = ((faster.length/nb)*100).toFixed(2);
+        console.log('Pourcentage plus rapide :', pourc);
+        return pourc;
     }
 };

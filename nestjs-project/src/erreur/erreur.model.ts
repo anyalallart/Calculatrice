@@ -1,4 +1,4 @@
 export interface Erreur {
     id: string;
-    created: Date;
+    created: string;
 }

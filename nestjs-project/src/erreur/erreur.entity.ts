@@ -1,9 +1,10 @@
-import {BaseEntity, Entity, PrimaryGeneratedColumn, CreateDateColumn} from 'typeorm';
+import {BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn} from 'typeorm';
 
 @Entity('erreur')
 export class Erreur extends BaseEntity{
     @PrimaryGeneratedColumn()
     id : string;
-    @CreateDateColumn()
+    //@CreateDateColumn()
+    @Column()
     created: string;
 }

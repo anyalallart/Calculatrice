@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Res } from '@nestjs/common';
 import { MessageDto } from './annonces.dto';
 
 import { AnnoncesService } from './annonces.service';
@@ -15,11 +15,12 @@ export class AnnoncesController {
     }
 
     @Post()
-    createAnnonce(@Body() message: MessageDto){
+    async createAnnonce(@Body() message: MessageDto){
         const t = this.annoncesService.timeEnd();
-        this.annoncesService.createAnnonces(t, message.calcul);
-        this.annoncesService.getMoy();
-        console.log(message);
-        return message;
+        let annonce = await this.annoncesService.createAnnonces(t, message.calcul);
+        let moyenne = await this.annoncesService.getMoy();
+        let pourc = await this.annoncesService.getPourc(t);
+        let obj = {annonce,moyenne, pourc};
+        return obj;
     }
 }

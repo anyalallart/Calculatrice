@@ -21,7 +21,9 @@ class BaseCalculator {
         if (this.out.innerHTML == "0"){ 
             this.out.innerHTML = carac;
             fetch('http://localhost:3000/annonces')
-            .then(function(res){ console.log(res) })
+            .then(function(res){ 
+                console.log(res) 
+            })
             .catch(function(res){ console.log(res) })
         }
         else this.out.innerHTML += carac;
@@ -40,15 +42,23 @@ class BaseCalculator {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                     },
-                    method: "POST",
-                    body: JSON.stringify({calcul: equation})
-                })
-            .then(function(res){ console.log(res) })
+                method: "POST",
+                body: JSON.stringify({calcul: equation})
+            })
+            .then(async function(res){ 
+                let obj = await res.json();
+                alert(`temps d'éxecution : ${obj.annonce.temps}ms        temps moyen : ${obj.moyenne}ms   pourcentage plus rapide : ${obj.pourc}%`);
+            })
             .catch(function(res){ console.log(res) })
+
         } catch (error) {
             this.out.innerHTML = "Error";
-            fetch('http://localhost:3000/erreur') // calcul faux, erreur
-            .then(function(res){ console.log(res) })
+            fetch('http://localhost:3000/erreur')
+            .then(async function(res){ 
+                let obj = await res.json();
+                console.log(obj);
+                alert(`dernière erreur : ${obj.lasterror.created}  nombre d'erreur : ${obj.nberror}`);
+            })
             .catch(function(res){ console.log(res) })
         }
     }
@@ -75,7 +85,6 @@ class BaseCalculator {
             this.out.innerHTML = "Error";
         }
     }
-
 }
 
 let baseCalculator = new BaseCalculator();

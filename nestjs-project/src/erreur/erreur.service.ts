@@ -12,8 +12,9 @@ export class ErreurService {
 
     async createErreur(){
         const erreur = new Erreur();
-        erreur.created = (new Date()).toISOString().split('T')[0];
-        console.log("bmblbl", erreur);
+        let d = new Date();
+        erreur.created = d.toISOString().split('T')[0]+' '+d.toTimeString().split(' ')[0];
+        console.log("erreur crée", erreur);
         
         try {
             await erreur.save(); 
@@ -21,17 +22,6 @@ export class ErreurService {
             console.log(error);
         }
         return erreur;
-    }
-
-    async getErreur(){
-        const res = await this.erreurRepository.findOne({
-            where: { },
-            order: {
-                id: "desc",
-            }
-        });
-        console.log('erreur est :', res);
-        return res;
     }
 
     async getNumber(){
